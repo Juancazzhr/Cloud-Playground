@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: ms-discovery
+
+server:
+  port: ${MS_DISCOVERY_PORT:8761}
