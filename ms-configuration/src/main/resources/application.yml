@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: ms-configuration
+
+  cloud:
+    vault:
+      enabled: false
+
+    config:
+      server:
+        git:
+          uri:
+          default-label: ${MS_CONFIGURATION_LABEL:dev}
+          basedir: ${user.home}
+          clone-on-start: true
+          search-paths:
+            - back-end
+          refresh-rate: 10
+
+  profiles:
+    active: local, dev, prod
+    default: local
+
+server:
+  port: ${MS_CONFIGURATION_PORT:8888}
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+info:
+  name: ${spring.application.name}
+  description: 'Service for expose remote configurations'
+  version: ${MS_CONFIGURATION_VERSION:0.0.1}
+  port: ${server.port}
